@@ -5,5 +5,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import li.nexus.nexus.entity.Material;
 
 public interface MaterialRepository extends JpaRepository<Material, Long> {
-    
+    boolean existsByNome(String nome);
+
+    Material findByNome(String nome);
+
 }

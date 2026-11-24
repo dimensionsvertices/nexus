@@ -7,7 +7,6 @@ import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
-import li.nexus.nexus.dto.ClientePostDTO;
 import li.nexus.nexus.dto.GerenteGetDTO;
 import li.nexus.nexus.dto.GerentePostDTO;
 import li.nexus.nexus.entity.Gerente;
@@ -22,5 +21,5 @@ public interface GerenteMapper {
     List<GerenteGetDTO> toGetDTOList(List<Gerente> entities);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEntity(@MappingTarget Gerente entity, ClientePostDTO dto);
+    void updateEntity(@MappingTarget Gerente entity, GerentePostDTO dto);
 }

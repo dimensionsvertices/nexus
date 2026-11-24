@@ -29,9 +29,9 @@ public class ClienteController {
         return clienteService.saveCliente(dto);
     }
 
-    @GetMapping("/{cnpj}")
-    public ClienteGetDTO getCliente(@PathVariable String cnpj) {
-        return clienteService.getClienteByCnpj(cnpj);
+    @GetMapping("/{cpf}")
+    public ClienteGetDTO getCliente(@PathVariable String cpf) {
+        return clienteService.getClienteByCnpj(cpf);
     }
 
     @GetMapping
@@ -39,14 +39,14 @@ public class ClienteController {
         return clienteService.getClientes();
     }
 
-    @PatchMapping("/{cnpj}")
-    public ClienteGetDTO patchCliente(@PathVariable String cnpj, @RequestBody ClientePostDTO dto) {
-        return clienteService.patchCliente(cnpj, dto);
+    @PatchMapping("/{cpf}")
+    public ClienteGetDTO patchCliente(@PathVariable String cpf, @RequestBody ClientePostDTO dto) {
+        return clienteService.patchCliente(cpf, dto);
     }
 
-    @DeleteMapping("/{cnpj}")
-    public void deleteCliente(@PathVariable String cnpj) {
-        clienteService.deleteClienteByCnpj(cnpj);
+    @DeleteMapping("/{cpf}")
+    public void deleteCliente(@PathVariable String cpf) {
+        clienteService.deleteClienteByCnpj(cpf);
     }
 
 }
