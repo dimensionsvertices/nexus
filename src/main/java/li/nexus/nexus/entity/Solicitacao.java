@@ -12,6 +12,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Size;
+import li.nexus.nexus.enums.EstadoSolicitacao;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
