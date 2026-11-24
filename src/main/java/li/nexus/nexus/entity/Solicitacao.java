@@ -34,6 +34,6 @@ public class Solicitacao {
     @Size(max = 500)
     private String justificativa;
     @Enumerated(EnumType.STRING)
-    private EstadoSolicitacao estadoSolicitacao = EstadoSolicitacao.PENDENTE;
+    private EstadoSolicitacao estadoSolicitacao;
     private LocalDateTime dataSolicitacao;
 }

@@ -20,5 +20,5 @@ public interface ClienteMapper {
     List<ClienteGetDTO> toGetDTOList(List<Cliente> entities);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void updateEntity(@MappingTarget Cliente cliente, ClientePostDTO dto);
+    void updateEntity(@MappingTarget Cliente entity, ClientePostDTO dto);
 }
