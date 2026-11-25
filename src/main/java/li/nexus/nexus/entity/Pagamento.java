@@ -16,7 +16,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@SoftDelete(columnName = "ativo")
+@SoftDelete(columnName = "inativo")
 @Getter
 @Setter
 @NoArgsConstructor
