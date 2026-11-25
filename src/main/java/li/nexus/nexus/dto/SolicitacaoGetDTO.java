@@ -15,6 +15,7 @@ import lombok.Setter;
 public class SolicitacaoGetDTO {
     private String clienteNome;
     private String gerenteNome;
+    private Long pedidoId;
     private int desconto;
     private String justificativa;
     private EstadoSolicitacao estadoSolicitacao;

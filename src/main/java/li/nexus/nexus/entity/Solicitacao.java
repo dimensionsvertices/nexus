@@ -37,5 +37,6 @@ public class Solicitacao {
     private String justificativa;
     @Enumerated(EnumType.STRING)
     private EstadoSolicitacao estadoSolicitacao;
-    private LocalDateTime dataSolicitacao;
+    private LocalDateTime dataSolicitacao = LocalDateTime.now();
+    private LocalDateTime dataDecisao;
 }

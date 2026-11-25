@@ -12,13 +12,15 @@ import li.nexus.nexus.dto.ItemGetDTO;
 import li.nexus.nexus.dto.ItemPostDTO;
 import li.nexus.nexus.entity.Item;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { PedidoMapper.class, MaterialMapper.class })
 public interface ItemMapper {
 
     @Mapping(target = "pedido", ignore = true)
     @Mapping(target = "material", ignore = true)
     Item toEntity(ItemPostDTO dto);
 
+    @Mapping(source = "pedido.id", target = "pedidoId")
+    @Mapping(source = "material.nome", target = "nomeMaterial")
     ItemGetDTO toGetDTO(Item entity);
 
     List<ItemGetDTO> toGetDTOList(List<Item> entities);
