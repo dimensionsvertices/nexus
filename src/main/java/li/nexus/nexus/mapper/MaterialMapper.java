@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
@@ -13,6 +14,8 @@ import li.nexus.nexus.entity.Material;
 
 @Mapper(componentModel = "spring")
 public interface MaterialMapper {
+
+    @Mapping(target = "id", ignore = true)
     Material toEntity(MaterialPostDTO dto);
 
     MaterialGetDTO toGetDTO(Material entity);

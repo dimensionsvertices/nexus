@@ -13,6 +13,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SolicitacaoGetDTO {
+    private String clienteNome;
     private String gerenteNome;
     private int desconto;
     private String justificativa;

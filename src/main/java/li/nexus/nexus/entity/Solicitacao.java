@@ -27,6 +27,8 @@ public class Solicitacao {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @ManyToOne(optional = false)
+    private Cliente cliente;
+    @ManyToOne(optional = false)
     private Gerente gerente;
     @ManyToOne(optional = false)
     private Pedido pedido;

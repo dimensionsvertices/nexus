@@ -1,11 +1,9 @@
 package li.nexus.nexus.dto;
 
 import java.time.LocalDate;
-import java.util.Map;
 
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import li.nexus.nexus.enums.EstadoPedido;
 import lombok.AllArgsConstructor;
@@ -26,11 +24,9 @@ public class PedidoPostDTO {
     private EstadoPedido estadoPedido;
 
     @NotBlank(message = "O nome do cliente não pode ser vazio.")
-    private String nomeCliente;
+    private String clienteNome;
 
     @NotNull(message = "O pagamento do pedido não pode ser vazio.")
     private Long pagamentoId;
 
-    @NotEmpty(message = "O pedido deve conter pelo menos um nome material com sua respectiva quantidade.")
-    private Map<String, Integer> quantidadeMateriais;
 }

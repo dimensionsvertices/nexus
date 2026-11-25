@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
+import org.mapstruct.Mapping;
 import org.mapstruct.MappingTarget;
 import org.mapstruct.NullValuePropertyMappingStrategy;
 
@@ -13,6 +14,7 @@ import li.nexus.nexus.entity.Cliente;
 
 @Mapper(componentModel = "spring")
 public interface ClienteMapper {
+    @Mapping(target = "id", ignore = true)
     Cliente toEntity(ClientePostDTO dto);
 
     ClienteGetDTO toGetDTO(Cliente entity);

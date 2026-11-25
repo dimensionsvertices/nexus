@@ -12,9 +12,10 @@ import li.nexus.nexus.dto.SolicitacaoGetDTO;
 import li.nexus.nexus.dto.SolicitacaoPostDTO;
 import li.nexus.nexus.entity.Solicitacao;
 
-@Mapper(componentModel = "spring")
+@Mapper(componentModel = "spring", uses = { ClienteMapper.class, GerenteMapper.class })
 public interface SolicitacaoMapper {
 
+    @Mapping(target = "cliente", ignore = true)
     @Mapping(target = "gerente", ignore = true)
     @Mapping(target = "estadoSolicitacao", ignore = true)
     @Mapping(target = "dataSolicitacao", ignore = true)
@@ -23,6 +24,7 @@ public interface SolicitacaoMapper {
     SolicitacaoGetDTO toGetDTO(Solicitacao entity);
 
     @Mapping(source = "gerente.nome", target = "gerenteNome")
+    @Mapping(source = "cliente.nome", target = "clienteNome")
     List<SolicitacaoGetDTO> toGetDTOList(List<Solicitacao> entities);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)

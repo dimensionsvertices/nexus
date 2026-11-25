@@ -15,9 +15,12 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SolicitacaoPostDTO {
+    private String clienteNome;
+    private String gerenteNome;
     @NotNull(message = "O desconto solicitado é obrigatório.")
     @DecimalMax(value = "10.00", message = "O desconto máximo permitido é 10%.")
     private BigDecimal descontoSolicitado;
     @NotBlank(message = "A justificativa é obrigatória.")
     private String justificativa;
+    private Long pedidoId;
 }

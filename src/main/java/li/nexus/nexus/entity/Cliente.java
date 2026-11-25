@@ -27,6 +27,7 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String cnpj;
+    @Column(unique = true)
     private String nome;
     @Email
     @Column(unique = true)
