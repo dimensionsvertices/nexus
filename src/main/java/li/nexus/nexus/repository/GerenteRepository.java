@@ -7,6 +7,8 @@ import li.nexus.nexus.entity.Gerente;
 public interface GerenteRepository extends JpaRepository<Gerente, Long> {
     boolean existsByCpf(String cpf);
 
+    boolean existsByNome(String nome);
+
     Gerente findByCpf(String cpf);
 
     Gerente findByNome(String nome);

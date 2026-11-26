@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/clientes")
@@ -25,7 +26,7 @@ public class ClienteController {
     private final ClienteService clienteService;
 
     @PostMapping
-    public ClienteGetDTO postCliente(@RequestBody ClientePostDTO dto) {
+    public ClienteGetDTO postCliente(@RequestBody @Valid ClientePostDTO dto) {
         return clienteService.saveCliente(dto);
     }
 

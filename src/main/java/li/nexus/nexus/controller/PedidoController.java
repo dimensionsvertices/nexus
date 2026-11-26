@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/pedidos")
@@ -25,7 +26,7 @@ public class PedidoController {
     private final PedidoService pedidoService;
 
     @PostMapping
-    public PedidoGetDTO postPedido(@RequestBody PedidoPostDTO dto) {
+    public PedidoGetDTO postPedido(@RequestBody @Valid PedidoPostDTO dto) {
         return pedidoService.savePedido(dto);
     }
 

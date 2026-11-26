@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/itens")
@@ -25,7 +26,7 @@ public class ItemController {
     private final ItemService itemService;
 
     @PostMapping
-    public ItemGetDTO postItem(@RequestBody ItemPostDTO dto) {
+    public ItemGetDTO postItem(@RequestBody @Valid ItemPostDTO dto) {
         return itemService.saveItem(dto);
     }
 

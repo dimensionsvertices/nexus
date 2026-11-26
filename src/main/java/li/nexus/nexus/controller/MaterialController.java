@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/materiais")
@@ -25,7 +26,7 @@ public class MaterialController {
     private final MaterialService materialService;
 
     @PostMapping
-    public MaterialGetDTO postMaterial(@RequestBody MaterialPostDTO dto) {
+    public MaterialGetDTO postMaterial(@RequestBody @Valid MaterialPostDTO dto) {
         return materialService.saveMaterial(dto);
     }
 

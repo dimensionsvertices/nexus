@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/pagamentos")
@@ -25,7 +26,7 @@ public class PagamentoController {
     private final PagamentoService pagamentoService;
 
     @PostMapping
-    public PagamentoGetDTO postPagamento(@RequestBody PagamentoPostDTO dto) {
+    public PagamentoGetDTO postPagamento(@RequestBody @Valid PagamentoPostDTO dto) {
         return pagamentoService.savePagamento(dto);
     }
 
