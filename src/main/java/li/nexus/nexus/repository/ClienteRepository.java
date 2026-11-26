@@ -8,6 +8,8 @@ public interface ClienteRepository extends JpaRepository<Cliente, Long> {
 
     boolean existsByCnpj(String cnpj);
 
+    boolean existsByNome(String nome);
+
     Cliente findByCnpj(String cnpj);
 
     Cliente findByNome(String nomeCliente);

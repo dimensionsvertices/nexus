@@ -8,6 +8,8 @@ import jakarta.transaction.Transactional;
 import li.nexus.nexus.dto.PagamentoGetDTO;
 import li.nexus.nexus.dto.PagamentoPostDTO;
 import li.nexus.nexus.entity.Pagamento;
+import li.nexus.nexus.exception.NenhumDadoEncontradoException;
+import li.nexus.nexus.exception.PagamentoNaoEncontradoException;
 import li.nexus.nexus.mapper.PagamentoMapper;
 import li.nexus.nexus.repository.PagamentoRepository;
 import lombok.AllArgsConstructor;
@@ -26,16 +28,28 @@ public class PagamentoService {
 
     @Transactional
     public List<PagamentoGetDTO> getPagamentos() {
+        if (pagamentoRepository.findAll().isEmpty()) {
+            throw new NenhumDadoEncontradoException("Nenhum dado cadastrado ou encontrado.");
+        }
+
         return pagamentoMapper.toGetDTOList(pagamentoRepository.findAll());
     }
 
     @Transactional
     public PagamentoGetDTO getPagamentoById(Long id) {
+        if (!pagamentoRepository.existsById(id)) {
+            throw new PagamentoNaoEncontradoException("Pagamento não encontrado com o ID: " + id);
+        }
+
         return pagamentoMapper.toGetDTO(pagamentoRepository.findById(id).get());
     }
 
     @Transactional
     public PagamentoGetDTO patchPagamento(Long id, PagamentoPostDTO dto) {
+        if (!pagamentoRepository.existsById(id)) {
+            throw new PagamentoNaoEncontradoException("Pagamento não encontrado com o ID: " + id);
+        }
+
         Pagamento pagamento = pagamentoRepository.findById(id).get();
         pagamentoMapper.updateEntity(pagamento, dto);
         return pagamentoMapper.toGetDTO(pagamentoRepository.save(pagamento));
@@ -43,6 +57,10 @@ public class PagamentoService {
 
     @Transactional
     public void deletePagamentoById(Long id) {
+        if (!pagamentoRepository.existsById(id)) {
+            throw new PagamentoNaoEncontradoException("Pagamento não encontrado com o ID: " + id);
+        }
+
         pagamentoRepository.delete(pagamentoRepository.findById(id).get());
     }
 

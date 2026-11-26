@@ -1,6 +1,7 @@
 package li.nexus.nexus.dto;
 
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,7 +13,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItemPostDTO {
-    @NotBlank(message = "O ID do pedido não pode ser vazio")
+    @NotNull(message = "O ID do pedido não pode ser vazio")
+    @Positive(message = "O ID do pedido deve ser maior que 0")
     private Long pedidoId;
     @NotBlank(message = "O nome do material não pode ser vazio")
     private String nomeMaterial;

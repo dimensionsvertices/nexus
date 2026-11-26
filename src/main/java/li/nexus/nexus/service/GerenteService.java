@@ -8,7 +8,9 @@ import jakarta.transaction.Transactional;
 import li.nexus.nexus.dto.GerenteGetDTO;
 import li.nexus.nexus.dto.GerentePostDTO;
 import li.nexus.nexus.entity.Gerente;
+import li.nexus.nexus.exception.CPFJaCadastradoException;
 import li.nexus.nexus.exception.CPFNaoEncontradoException;
+import li.nexus.nexus.exception.NenhumDadoEncontradoException;
 import li.nexus.nexus.mapper.GerenteMapper;
 import li.nexus.nexus.repository.GerenteRepository;
 import lombok.AllArgsConstructor;
@@ -22,39 +24,49 @@ public class GerenteService {
 
     @Transactional
     public GerenteGetDTO saveGerente(GerentePostDTO dto) {
+        if (gerenteRepository.existsByCpf(dto.getCpf())) {
+            throw new CPFJaCadastradoException("Gerente já cadastrado com este CPF:" + dto.getCpf());
+        }
+
         return gerenteMapper.toGetDto(gerenteRepository.save(gerenteMapper.toEntity(dto)));
     }
 
     @Transactional
     public List<GerenteGetDTO> getGerentes() {
+        if (gerenteRepository.findAll().isEmpty()) {
+            throw new NenhumDadoEncontradoException("Nenhum dado cadastrado ou encontrado.");
+        }
+
         return gerenteMapper.toGetDTOList(gerenteRepository.findAll());
     }
 
     @Transactional
-    public GerenteGetDTO getGerenteByCpf(String cnpj) {
-        if (!gerenteRepository.existsByCpf(cnpj)) {
-            throw new CPFNaoEncontradoException("Gerente não encontrado.");
+    public GerenteGetDTO getGerenteByCpf(String cpf) {
+        if (!gerenteRepository.existsByCpf(cpf)) {
+            throw new CPFNaoEncontradoException("Gerente não encontrado com este CPF: " + cpf);
         }
-        return gerenteMapper.toGetDto(gerenteRepository.findByCpf(cnpj));
+
+        return gerenteMapper.toGetDto(gerenteRepository.findByCpf(cpf));
     }
 
     @Transactional
-    public GerenteGetDTO patchGerente(String cnpj, GerentePostDTO dto) {
-        if (!gerenteRepository.existsByCpf(cnpj)) {
-            throw new CPFNaoEncontradoException("Gerente não encontrado.");
+    public GerenteGetDTO patchGerente(String cpf, GerentePostDTO dto) {
+        if (!gerenteRepository.existsByCpf(cpf)) {
+            throw new CPFNaoEncontradoException("Gerente não encontrado com este CPF: " + cpf);
         }
 
-        Gerente gerente = gerenteRepository.findByCpf(cnpj);
+        Gerente gerente = gerenteRepository.findByCpf(cpf);
         gerenteMapper.updateEntity(gerente, dto);
         return gerenteMapper.toGetDto(gerenteRepository.save(gerente));
     }
 
     @Transactional
-    public void deleteGerenteByCpf(String cnpj) {
-        if (!gerenteRepository.existsByCpf(cnpj)) {
-            throw new CPFNaoEncontradoException("Gerente não encontrado.");
+    public void deleteGerenteByCpf(String cpf) {
+        if (!gerenteRepository.existsByCpf(cpf)) {
+            throw new CPFNaoEncontradoException("Gerente não encontrado com este CPF: " + cpf);
         }
-        gerenteRepository.delete(gerenteRepository.findByCpf(cnpj));
+
+        gerenteRepository.delete(gerenteRepository.findByCpf(cpf));
     }
 
 }

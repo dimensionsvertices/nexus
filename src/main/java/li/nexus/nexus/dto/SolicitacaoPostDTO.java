@@ -1,6 +1,5 @@
 package li.nexus.nexus.dto;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import jakarta.validation.constraints.DecimalMax;
