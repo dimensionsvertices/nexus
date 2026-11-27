@@ -14,6 +14,7 @@ import org.springframework.core.annotation.Order;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -91,6 +92,13 @@ public class GlobalExceptionHandler {
     public ErrorResponse handleViolacaoDeIntegridade(DataIntegrityViolationException exception) {
         return criarErrorResponse(HttpStatus.CONFLICT,
                 new IllegalStateException("A operação conflita com os dados existentes."));
+    }
+
+    @ExceptionHandler(AuthenticationException.class)
+    @ResponseStatus(HttpStatus.UNAUTHORIZED)
+    public ErrorResponse handleFalhaDeAutenticacao(AuthenticationException exception) {
+        return criarErrorResponse(HttpStatus.UNAUTHORIZED,
+                new IllegalArgumentException("E-mail ou senha inválidos."));
     }
 
     @ExceptionHandler(Exception.class)

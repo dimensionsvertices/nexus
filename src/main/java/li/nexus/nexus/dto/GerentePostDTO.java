@@ -3,6 +3,7 @@ package li.nexus.nexus.dto;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,4 +28,8 @@ public class GerentePostDTO {
     @NotBlank(message = "O CPF do gerente não pode ser vazio")
     @Pattern(regexp = "\\d{11}", message = "O CPF deve conter exatamente 11 números.")
     private String cpf;
+
+    @NotBlank(message = "A senha do gerente não pode ser vazia.")
+    @Size(min = 12, message = "A senha deve possuir pelo menos 12 caracteres.")
+    private String senha;
 }
