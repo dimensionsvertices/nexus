@@ -15,6 +15,8 @@ import li.nexus.nexus.entity.Gerente;
 @Mapper(componentModel = "spring")
 public interface GerenteMapper {
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "role", ignore = true)
+    @Mapping(target = "senhaHash", ignore = true)
     Gerente toEntity(GerentePostDTO dto);
 
     GerenteGetDTO toGetDto(Gerente entity);
@@ -22,5 +24,7 @@ public interface GerenteMapper {
     List<GerenteGetDTO> toGetDTOList(List<Gerente> entities);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
+    @Mapping(target = "role", ignore = true)
+    @Mapping(target = "senhaHash", ignore = true)
     void updateEntity(@MappingTarget Gerente entity, GerentePostDTO dto);
 }

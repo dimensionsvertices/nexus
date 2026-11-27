@@ -1,5 +1,7 @@
 package li.nexus.nexus.repository;
 
+import java.util.Optional;
+
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import li.nexus.nexus.entity.Gerente;
@@ -12,4 +14,6 @@ public interface GerenteRepository extends JpaRepository<Gerente, Long> {
     Gerente findByCpf(String cpf);
 
     Gerente findByNome(String nome);
+
+    Optional<Gerente> findByEmailIgnoreCase(String email);
 }

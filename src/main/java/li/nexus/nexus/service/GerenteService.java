@@ -5,12 +5,14 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import jakarta.transaction.Transactional;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import li.nexus.nexus.dto.GerenteGetDTO;
 import li.nexus.nexus.dto.GerentePostDTO;
 import li.nexus.nexus.entity.Gerente;
 import li.nexus.nexus.exception.CPFJaCadastradoException;
 import li.nexus.nexus.exception.CPFNaoEncontradoException;
 import li.nexus.nexus.exception.NenhumDadoEncontradoException;
+import li.nexus.nexus.enums.UserRole;
 import li.nexus.nexus.mapper.GerenteMapper;
 import li.nexus.nexus.repository.GerenteRepository;
 import lombok.AllArgsConstructor;
@@ -21,6 +23,7 @@ public class GerenteService {
 
     private final GerenteRepository gerenteRepository;
     private final GerenteMapper gerenteMapper;
+    private final PasswordEncoder passwordEncoder;
 
     @Transactional
     public GerenteGetDTO saveGerente(GerentePostDTO dto) {
@@ -28,7 +31,10 @@ public class GerenteService {
             throw new CPFJaCadastradoException("Gerente já cadastrado com este CPF:" + dto.getCpf());
         }
 
-        return gerenteMapper.toGetDto(gerenteRepository.save(gerenteMapper.toEntity(dto)));
+        Gerente gerente = gerenteMapper.toEntity(dto);
+        gerente.setSenhaHash(passwordEncoder.encode(dto.getSenha()));
+        gerente.setRole(UserRole.GERENTE);
+        return gerenteMapper.toGetDto(gerenteRepository.save(gerente));
     }
 
     @Transactional
